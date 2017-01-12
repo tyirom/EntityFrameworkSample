@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DbTransaction.cs" />
+    <Compile Include="Database\DbTransaction2.cs" />
     <Compile Include="MediaSample.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Media.cs" />
