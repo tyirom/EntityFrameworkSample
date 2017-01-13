@@ -11,13 +11,25 @@ namespace EntityFrameworkSample.Model
 
 	public class Repository : DbContext
 	{
-		static Repository()
+		public string DataDirectoryPath { get; set; }
+
+		public DbSet<Media> Medias { get; set; }
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			AppDomain.CurrentDomain.SetData("DataDirectory", @"E:\tmp");
+			AppDomain.CurrentDomain.SetData("DataDirectory", this.DataDirectoryPath);
 			//Database.SetInitializer(new SqliteCreateDatabaseIfNotExists<Repository>(modelBuilder));
 			Database.SetInitializer(new MigrateDatabaseToLatestVersion<Repository, Configuration>());
 		}
 
-		public DbSet<Media> Medias { get; set; }
+		public Repository()
+		{
+			this.DataDirectoryPath = @"E:\tmp";
+		}
+
+		public Repository(string dataDirectoryPath)
+		{
+			this.DataDirectoryPath = dataDirectoryPath;
+		}
 	}
 }
